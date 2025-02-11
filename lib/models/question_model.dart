@@ -1,3 +1,5 @@
+import 'package:space_scutum_test_task/utility.dart';
+
 class Question {
   final String difficulty;
   final String category;
@@ -14,12 +16,12 @@ class Question {
 
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
-      difficulty: json['difficulty'] as String,
-      category: json['category'] as String,
-      question: json['question'] as String,
-      correctAnswer: json['correct_answer'] as String,
+      difficulty: json['difficulty'].toString(),
+      category: json['category'].toString(),
+      question: json['question'].toString().fixString(),
+      correctAnswer: json['correct_answer'].toString().fixString(),
       incorrectAnswers: (json['incorrect_answers'] as List<dynamic>)
-          .map((e) => e.toString())
+          .map((e) => e.toString().fixString())
           .toList(),
     );
   }

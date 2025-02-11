@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:space_scutum_test_task/utility.dart';
 import 'package:space_scutum_test_task/widgets/answer_button_widget.dart';
 
 class AllAnswersWidget extends StatefulWidget {
@@ -31,7 +30,7 @@ class _AllAnswersWidgetState extends State<AllAnswersWidget> {
     List<Widget> buttons = [
       for (int i = 0; i < widget.answers.length; i++)
         AnswerButtonWidget(
-          text: getFixedString(widget.answers[i]),
+          text: widget.answers[i],
           answerIndex: i,
           isSelected: selectedIndex == i,
           onTap: updateCurrentIndex,

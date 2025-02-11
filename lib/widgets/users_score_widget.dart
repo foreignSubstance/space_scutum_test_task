@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:space_scutum_test_task/models/component_properties_model.dart';
 
 class UsersScoreWidget extends StatelessWidget {
   const UsersScoreWidget({
@@ -10,14 +11,17 @@ class UsersScoreWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle textTheme = Theme.of(context)
+        .textTheme
+        .titleLarge!
+        .copyWith(color: ComponentColors.primaryButtonBlue, fontSize: 32);
     return Container(
-      padding: const EdgeInsets.all(30),
-      decoration: const BoxDecoration(
+      width: ComponentSizes.screenWidth,
+      height: ComponentSizes.buttonHeight * 3,
+      decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.all(
-          Radius.circular(8),
-        ),
-        boxShadow: [
+        borderRadius: BorderRadius.circular(ComponentSizes.defaultRadius),
+        boxShadow: const [
           BoxShadow(
             color: Colors.black54,
             offset: Offset(0, 5),
@@ -26,21 +30,21 @@ class UsersScoreWidget extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            'Your Score is',
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge!
-                .copyWith(color: const Color(0xff107eeb), fontSize: 36),
-          ),
-          Text(
-            '$score',
+          RichText(
             textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge!
-                .copyWith(color: const Color(0xff107eeb), fontSize: 64),
+            text: TextSpan(
+              style: textTheme,
+              children: [
+                const TextSpan(
+                  text: 'Your Score is \n',
+                ),
+                TextSpan(
+                  text: '$score',
+                ),
+              ],
+            ),
           ),
         ],
       ),

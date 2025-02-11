@@ -1,87 +1,53 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:space_scutum_test_task/models/component_sizes_model.dart';
+import 'package:space_scutum_test_task/models/component_properties_model.dart';
 import 'package:space_scutum_test_task/providers/query_configuration_provider.dart';
 import 'package:space_scutum_test_task/providers/timer_provider.dart';
 
-class TimerWidget extends ConsumerStatefulWidget {
-  const TimerWidget({
-    super.key,
-    required this.onTimeEnd,
-  });
-
-  final void Function(Timer) onTimeEnd;
+class TimerWidget extends ConsumerWidget {
+  const TimerWidget({super.key});
 
   @override
-  ConsumerState<TimerWidget> createState() => _TimerWidgetState();
-}
-
-class _TimerWidgetState extends ConsumerState<TimerWidget> {
-  double spentTime = 0;
-  late int totalTime;
-  late final Timer timer;
-
-  @override
-  void initState() {
-    super.initState();
-    timer = Timer.periodic(const Duration(milliseconds: 100), timerCallback);
-    totalTime = ref.read(queryConfigurationProvider).time!;
-  }
-
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
-  }
-
-  void timerCallback(Timer timer) {
-    spentTime = ref.read(timerProvider);
-    if (spentTime < totalTime) {
-      setState(() {
-        ref.read(timerProvider.notifier).incrementTimer();
-      });
-    } else {
-      widget.onTimeEnd(timer);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final spentTime = ref.watch(timerProvider).value;
+    final totalTime = ref.read(queryConfigurationProvider).time!;
     final currentValue = ((ComponentSizes.screenWidth -
                 2 * ComponentSizes.borderWidth -
                 2 * ComponentSizes.defaultPadding) *
             spentTime) /
         totalTime;
-    return SizedBox(
-      width: ComponentSizes.screenWidth,
-      height: ComponentSizes.freeSpace,
-      child: CustomPaint(
-        painter: TimerAppearance(
-          progressionValue: currentValue,
-          borderWidth: ComponentSizes.borderWidth,
-        ),
-        child: Center(
-          child: Text(
-            spentTime.toStringAsFixed(0),
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+    return Column(
+      children: [
+        SizedBox(height: ComponentSizes.freeSpace),
+        SizedBox(
+          width: ComponentSizes.screenWidth,
+          height: ComponentSizes.freeSpace,
+          child: CustomPaint(
+            painter: _TimerAppearance(
+              progressionValue: currentValue,
+              borderWidth: ComponentSizes.borderWidth,
+            ),
+            child: Center(
+              child: Text(
+                spentTime.toStringAsFixed(0),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
 
-class TimerAppearance extends CustomPainter {
+class _TimerAppearance extends CustomPainter {
   final double progressionValue;
   final double borderWidth;
 
-  TimerAppearance({
-    super.repaint,
+  _TimerAppearance({
     required this.progressionValue,
     required this.borderWidth,
   });
@@ -164,7 +130,7 @@ class TimerAppearance extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(TimerAppearance oldDelegate) {
+  bool shouldRepaint(_TimerAppearance oldDelegate) {
     return progressionValue != oldDelegate.progressionValue;
   }
 }

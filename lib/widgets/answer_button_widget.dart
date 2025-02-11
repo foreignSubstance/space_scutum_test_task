@@ -35,8 +35,9 @@ class AnswerButtonWidget extends ConsumerWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          side: const BorderSide(
-            color: Color(0xff21486a),
+          side: BorderSide(
+            color:
+                isSelected ? const Color(0xff107eeb) : const Color(0xff21486a),
             width: 4,
             strokeAlign: BorderSide.strokeAlignOutside,
           ),

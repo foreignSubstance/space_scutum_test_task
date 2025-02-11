@@ -17,7 +17,7 @@ class CheckIconWidget extends StatelessWidget {
             border: Border.all(
               color: const Color(0xff107eeb),
               strokeAlign: BorderSide.strokeAlignInside,
-              width: 4,
+              width: 2,
             ),
           )
         : BoxDecoration(
@@ -35,7 +35,7 @@ class CheckIconWidget extends StatelessWidget {
         style: TextStyle(
           color: isChecked ? Colors.white : Colors.transparent,
           fontFamily: Icons.check.fontFamily,
-          fontSize: isChecked ? 17 : 21,
+          fontSize: 21,
           fontWeight: FontWeight.bold,
         ),
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_scutum_test_task/models/component_sizes_model.dart';
+import 'package:space_scutum_test_task/models/component_properties_model.dart';
 import 'package:space_scutum_test_task/widgets/all_categories_widget.dart';
 import 'package:space_scutum_test_task/widgets/all_difficulties_widget.dart';
 import 'package:space_scutum_test_task/widgets/custom_slider_widget.dart';

@@ -13,5 +13,9 @@ final defaultTheme = ThemeData().copyWith(
           fontWeight: FontWeight.w500,
           fontSize: 20,
         ),
+        bodyLarge: const TextStyle(
+          fontSize: 14,
+          color: Colors.white,
+        ),
       ),
 );

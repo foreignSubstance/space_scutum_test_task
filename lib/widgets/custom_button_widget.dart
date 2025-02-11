@@ -1,34 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:space_scutum_test_task/models/component_properties_model.dart';
 
 class CustomButtonWidget extends StatelessWidget {
   const CustomButtonWidget(
-      {super.key,
-      required this.buttonWidth,
-      required this.buttonHeight,
-      required this.label,
-      required this.onTap});
+      {super.key, required this.label, required this.onTap});
 
-  final double buttonWidth;
-  final double buttonHeight;
   final String label;
-  final void Function() onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: ButtonAppearance(
         context: context,
-        width: buttonWidth,
-        height: buttonHeight,
+        width: ComponentSizes.buttonWidth,
+        height: ComponentSizes.buttonHeight,
         label: label,
       ),
       child: Material(
         color: Colors.transparent,
         child: Ink(
-          width: buttonWidth,
-          height: buttonHeight,
+          width: ComponentSizes.buttonWidth,
+          height: ComponentSizes.buttonHeight,
           child: InkWell(
-              borderRadius: BorderRadius.circular(buttonHeight / 2),
+              borderRadius:
+                  BorderRadius.circular(ComponentSizes.buttonHeight / 2),
               onTap: onTap),
         ),
       ),

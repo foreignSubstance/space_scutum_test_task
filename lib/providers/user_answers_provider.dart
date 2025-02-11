@@ -7,6 +7,10 @@ class UserAnswersNotifier extends StateNotifier<Map<int, String>> {
     temp[index] = answer;
     state = Map.from(temp);
   }
+
+  void resetAnswers() {
+    state = {};
+  }
 }
 
 final userAnswersProvider =

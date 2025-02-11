@@ -33,4 +33,9 @@ class QuizConfigurator {
         'https://opentdb.com/api.php?amount=$questionsAmount$categoryString$difficultyString';
     return query;
   }
+
+  @override
+  String toString() {
+    return '$questionsAmount __$time __ $category __ $difficulty';
+  }
 }
